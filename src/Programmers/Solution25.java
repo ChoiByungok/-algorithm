@@ -1,27 +1,24 @@
 package Programmers;
 
+import java.util.Stack;
+
 /**
  * 짝지어 제거하기
- * 효율성 실패
+ * 효율성 성공
  */
 public class Solution25 {
     public int solution(String s) {
 
-        StringBuilder newS = new StringBuilder();
-        newS.append(s);
-        for (int i = 0; i < newS.length()-1 ; i++) {
-            if(newS.charAt(i) == newS.charAt(i+1)){
-                newS.delete(i,i+2);
-                i = -1;
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if(stack.isEmpty() || stack.peek() != s.charAt(i)){
+                stack.push(s.charAt(i));
+            } else if (stack.peek() == s.charAt(i)) {
+                stack.pop();
             }
         }
-
-        if(newS.length() == 0){
-            return 1;
-        }else {
-            return 0;
-        }
-
+        return stack.isEmpty() ? 1 : 0;
     }
 
     public static void main(String[] args) {
