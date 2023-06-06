@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 
 /**
  *[3차] 파일명 정렬(실패) 정답률 80%
+ * replaceAll("[^A-Z]", "") 지우니깐 통과됨
+ * 원인은 아마 문자열 길이가 줄어들어서 문자열의 범위를 넘어간 인덱스 접근에 의해 런타임에러가 나오지 않았을까
  */
 public class Solution48 {
      class FileName {
@@ -19,40 +21,16 @@ public class Solution48 {
              this.number = number;
              this.tail = tail;
          }
-
          public String getHead() {
             return head;
         }
 
-        public void setHead(String head) {
-            this.head = head;
-        }
 
         public String getNumber() {
             return number;
         }
 
-        public void setNumber(String number) {
-            this.number = number;
-        }
-
-        public String getTail() {
-            return tail;
-        }
-
-        public void setTail(String tail) {
-            this.tail = tail;
-        }
-
-         @Override
-         public String toString() {
-             return "FileName{" +
-                     "head='" + head + '\'' +
-                     ", number=" + number +
-                     ", tail='" + tail + '\'' +
-                     '}';
-         }
-         public String perfectFileName() {
+        public String perfectFileName() {
              return head + number + tail;
          }
      }
@@ -88,17 +66,14 @@ public class Solution48 {
             FileName fileName = new FileName(header, num, tail);
             list.add(fileName);
         }
-        System.out.println("list = " + list);
         list.sort((o1, o2) -> {
             if (o1.getHead().equalsIgnoreCase(o2.getHead())) {
                 return Integer.parseInt(o1.getNumber()) - Integer.parseInt(o2.getNumber());
             } else {
                 return o1.getHead()
                         .toUpperCase()
-                        .replaceAll("[^A-Z]", "")
                         .compareToIgnoreCase(o2.getHead()
-                                .toUpperCase()
-                                .replaceAll("[^A-Z]", ""));
+                                .toUpperCase());
             }
         });
         return IntStream
