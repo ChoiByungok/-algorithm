@@ -3,14 +3,13 @@ package Programmers3;
 import java.util.*;
 
 /**
- * 방문 길이 실패
- * 원인 한번 간적이 있는 좌표를 중복에서 아예 제거 해버렸는데 순환 구조 일시 좌표는 중복이어도 선분은 중복이 되지 않음
- * 어떻게 해야 할지 감이 안잡힘
+ * 방문 길이 성공
+ * 좌표가 아닌 돌아다닌 선분을 String 형태로 set 에 저장해봄 선분의 위치는 좌표와 좌표사이 0.5라고 표현함
  */
 public class Solution12 {
     static class Point {
-        int x;
-        int y;
+        private double x;
+        private double y;
 
         public Point() {
 
@@ -21,11 +20,11 @@ public class Solution12 {
             this.y = y;
         }
 
-        public int getX() {
+        public double getX() {
             return x;
         }
 
-        public int getY() {
+        public double getY() {
             return y;
         }
 
@@ -67,8 +66,7 @@ public class Solution12 {
         }
     }
     public int solution(String dirs) {
-        int answer = 0;
-        Set<Point> points = new LinkedHashSet<>();
+        Set<String> coordinate = new LinkedHashSet<>();
         Point point = new Point();
         for (int i = 0; i < dirs.length(); i++) {
             if (dirs.charAt(i) == 'U') {
@@ -76,40 +74,39 @@ public class Solution12 {
                     continue;
                 }
                 point.U();
-                Point pointU = new Point(point.getX(), point.getY());
-                points.add(pointU);
+                coordinate.add(point.getX() + "," + (point.getY() - 0.5));
             } else if (dirs.charAt(i) == 'D') {
                 if (point.getY() == -5) {
                     continue;
                 }
                 point.D();
-                Point pointD = new Point(point.getX(), point.getY());
-                points.add(pointD);
+                coordinate.add(point.getX() + "," + (point.getY() + 0.5));
+
             } else if (dirs.charAt(i) == 'R') {
                 if (point.getX() == 5) {
                     continue;
                 }
                 point.R();
-                Point pointR = new Point(point.getX(), point.getY());
-                points.add(pointR);
+                coordinate.add((point.getX() - 0.5) + "," + point.getY());
+
             } else {
                 if (point.getX() == -5) {
                     continue;
                 }
                 point.L();
-                Point pointL = new Point(point.getX(), point.getY());
-                points.add(pointL);
+                coordinate.add((point.getX() + 0.5) + "," + point.getY());
+
             }
         }
         System.out.println("point = " + point);
-        System.out.println("points = " + points);
-        return points.size();
+        System.out.println("coordinate = " + coordinate);
+        return coordinate.size();
     }
 
     public static void main(String[] args) {
         String dirs1 = "ULURRDLLU";
         String dirs2 = "LULLLLLLU";
 
-        System.out.println(new Solution12().solution(dirs1));
+        System.out.println(new Solution12().solution(dirs2));
     }
 }
