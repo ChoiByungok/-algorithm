@@ -1,14 +1,17 @@
 package Programmers3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * n^2 배열 자르기
- * 메모리 초과로 인한 실패
+ * 2차원 배열의 좌표가 n값을 left로 나눴을때 몫이 행의 좌표가 되고 나머지가 열의 좌표가 되는것을 이용했다.
+ * 그 두 값중 큰 값이 배열의 값이 된다.
  */
 public class Solution15 {
     public int[] solution(int n, long left, long right) {
-        int[] answer = new int[(int)((right - left) + 1)];
+/*        int[] answer = new int[(int)((right - left) + 1)];
         int [][] twoDArray = new int[n][n];
         int index = 0;
         int idx = 0;
@@ -29,7 +32,12 @@ public class Solution15 {
             }
         }
         System.out.println("twoDArray = " + Arrays.deepToString(twoDArray));
-        return answer;
+        return answer;*/
+        List<Integer> answer = new ArrayList<>();
+        for (long i = left; i <= right ; i++) {
+            answer.add((int) (Math.max(i / n, i % n)) + 1);
+        }
+        return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static void main(String[] args) {
