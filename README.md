@@ -1,2 +1,2 @@
-# -algorithm
- algorithm-practice
+# Algorithm
+ 프로그래머스와 백준의 알고리즘 문제를 자바로 풀이한다.
