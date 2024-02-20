@@ -13,6 +13,7 @@ import java.util.Queue;
  * 우선순위큐를 내림차순으로 만들고 맨 앞에 요소를 빼서 비교한 뒤
  * 빼낸 요소가 1번후보와 같거나 크면 1번후보를 1증가 시키고 요소를 1감소시킨 뒤 다시 큐에 넣는다.
  * 그렇게 반복하다가 1번후보가 맨앞에 요소보다 커지는 순간 반복문을 종료하면 된다.
+ *
  */
 public class Solution135 {
     public static void main(String[] args) throws IOException {
